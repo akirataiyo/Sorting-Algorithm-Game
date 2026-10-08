@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="เกมฝึก Sorting Algorithm: เรียงขวดยาตาม Bubble, Selection, Insertion และ Quick Sort">
-<title>ร้านยาของนักเล่นแร่แปรธาตุ — เกมเรียงลำดับ</title>
+<title>ร้านยาของนักเล่นแร่แปรธาตุ: เกมเรียงลำดับ</title>
 <style>
 :root{
   --bg:#130f1e; --panel:#211a33; --panel2:#2d2446; --line:#4a3c6e;
@@ -25,7 +25,7 @@ body{
 .header-tools{display:flex;gap:.4rem}
 main{max-width:1100px;margin:0 auto;padding:1rem}
 .screen[hidden]{display:none}
-h1{font-size:clamp(1.7rem,5vw,2.8rem);margin:.2em 0;color:var(--accent);text-shadow:0 0 18px rgba(255,204,102,.35);line-height:1.25}
+h1{font-size:clamp(1.7rem,5vw,2.8rem);margin:.2em 0;color:var(--accent);line-height:1.25}
 h2{font-size:clamp(1.3rem,3.6vw,1.8rem);margin:.2em 0 .5em;color:var(--accent)}
 h2:focus{outline:none}
 h3{margin:.3em 0;color:var(--accent2);font-size:1.1rem}
@@ -46,8 +46,7 @@ a{color:var(--accent2)}
 .title-wrap{text-align:center;padding-top:1rem}
 .title-wrap .lead{font-size:1.1rem;color:var(--muted);max-width:640px;margin:0 auto 1rem}
 .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin:1rem 0}
-.menu-card{text-align:left;display:flex;flex-direction:column;gap:.3rem;padding:1rem;border-radius:16px;min-height:130px}
-.menu-card .ico{font-size:2rem;line-height:1}
+.menu-card{text-align:left;display:flex;flex-direction:column;gap:.3rem;padding:1rem;border-radius:16px;min-height:100px}
 .menu-card strong{font-size:1.15rem;color:var(--accent)}
 .menu-card span.d{color:var(--muted);font-size:.93rem}
 .level-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.8rem}
@@ -163,10 +162,10 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
 </head>
 <body>
 <header class="app-header">
-  <button type="button" class="brand" data-nav="title" aria-label="กลับหน้าแรก">⚗️ ร้านยาของนักเล่นแร่แปรธาตุ</button>
+  <button type="button" class="brand" data-nav="title" aria-label="กลับหน้าแรก">ร้านยาของนักเล่นแร่แปรธาตุ</button>
   <div class="header-tools">
     <button type="button" class="btn small" data-nav="menu">เมนู</button>
-    <button type="button" class="btn small" id="mute-btn" aria-pressed="false" aria-label="ปิดเสียง">🔊 เสียง</button>
+    <button type="button" class="btn small" id="mute-btn" aria-pressed="false" aria-label="ปิดเสียง">เสียง: เปิด</button>
   </div>
 </header>
 <main>
@@ -176,42 +175,42 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
 <section class="screen" id="screen-title" hidden aria-labelledby="title-h">
   <div class="title-wrap">
     <h2 id="title-h" class="sr-only">หน้าแรก</h2>
-    <h1>⚗️ ร้านยาของนักเล่นแร่แปรธาตุ</h1>
-    <p class="lead">ขวดยาบนชั้นวางกระจัดกระจาย! จงเรียงขวดตาม "พลัง" จากน้อยไปมาก ด้วยวิชาเรียงลำดับ (Sorting Algorithm) ทั้ง 4 สำนัก: Bubble, Selection, Insertion และ Quick Sort</p>
+    <h1>ร้านยาของนักเล่นแร่แปรธาตุ</h1>
+    <p class="lead">เรียงขวดยาตามตัวเลขพลังจากน้อยไปมาก โดยใช้ Sorting Algorithm 4 แบบ: Bubble, Selection, Insertion และ Quick Sort</p>
     <div class="shelf" id="title-shelf" aria-label="ตัวอย่างชั้นวางขวดยา"></div>
     <div class="row center">
-      <button type="button" class="btn primary" data-nav="menu">▶ เริ่มเล่น</button>
-      <button type="button" class="btn" data-nav="howto">📜 วิธีเล่น</button>
-      <button type="button" class="btn" data-nav="codex">📖 สมุดตำรา</button>
+      <button type="button" class="btn primary" data-nav="menu">เริ่มเล่น</button>
+      <button type="button" class="btn" data-nav="howto">วิธีเล่น</button>
+      <button type="button" class="btn" data-nav="codex">คู่มืออัลกอริทึม</button>
     </div>
   </div>
 </section>
 
 <!-- วิธีเล่น -->
 <section class="screen" id="screen-howto" hidden aria-labelledby="howto-h">
-  <h2 id="howto-h">📜 วิธีเล่น</h2>
+  <h2 id="howto-h">วิธีเล่น</h2>
   <div class="card">
     <h3>เป้าหมาย</h3>
-    <p>ขวดยาแต่ละขวดมี <strong>ตัวเลขพลัง</strong> (1–99) เขียนอยู่บนขวด ขวดยิ่งสูงและสีออกส้มแดง แปลว่าพลังยิ่งมาก จงเรียงขวดจาก <strong>น้อยไปมาก</strong> (ซ้าย → ขวา) ตำแหน่งของขวดเริ่มนับจาก 0 (ตัวเลขเล็กใต้ขวด)</p>
+    <p>ขวดแต่ละขวดมีตัวเลขพลัง 1–99 ขวดที่สูงและสีออกส้มแดงมีพลังมาก ให้เรียงจากน้อยไปมาก ซ้ายไปขวา ตัวเลขเล็กใต้ขวดคือตำแหน่ง เริ่มนับที่ 0</p>
   </div>
   <div class="card">
-    <h3>🎓 โหมด 1: ฝึกวิชา</h3>
-    <p>เรียงขวดโดยทำตามกฎของอัลกอริทึมที่กำหนด <strong>ทีละขั้น</strong> เกมจะคำนวณขั้นตอนจริงของอัลกอริทึมไว้ล่วงหน้าและตรวจทุกการกระทำของคุณ</p>
+    <h3>โหมด 1: ฝึกเรียง</h3>
+    <p>ทำตามกฎของอัลกอริทึมทีละขั้น เกมคำนวณขั้นตอนจริงไว้ก่อนแล้ว และตรวจทุกครั้งที่คุณตอบ</p>
     <ul>
       <li><strong>Bubble Sort:</strong> ดูคู่ขวดติดกันที่ไฮไลต์ แล้วกด "สลับ" (<kbd>S</kbd>) ถ้าซ้ายมากกว่าขวา หรือ "ไม่สลับ" (<kbd>P</kbd>)</li>
-      <li><strong>Selection Sort:</strong> คลิกขวดที่น้อยที่สุดในส่วนที่ยังไม่เรียง (ถ้าเท่ากัน เลือกขวดซ้ายสุด)</li>
-      <li><strong>Insertion Sort:</strong> ขวด key ถูกยกขึ้น ⬆ คลิกช่อง ⤓ ที่จะแทรก key (ค่าที่เท่ากัน key วางไว้ข้างหลัง)</li>
-      <li><strong>Quick Sort (Lomuto):</strong> ตัดสินว่าขวดน้อยกว่า pivot ★ หรือไม่ (<kbd>L</kbd> = &lt; pivot, <kbd>R</kbd> = ≥ pivot) แล้วคลิกตำแหน่งที่ pivot ควรไปอยู่</li>
+      <li><strong>Selection Sort:</strong> คลิกขวดที่น้อยที่สุดในส่วนที่ยังไม่เรียง ถ้าเท่ากันให้เลือกขวดซ้ายสุด</li>
+      <li><strong>Insertion Sort:</strong> ขวด key ถูกยกขึ้น ⬆ คลิกช่อง ⤓ ที่จะวาง key ถ้าเจอค่าที่เท่ากัน ให้วาง key ไว้หลังค่านั้น</li>
+      <li><strong>Quick Sort (Lomuto):</strong> ตอบว่าขวดน้อยกว่า pivot ★ หรือไม่ (<kbd>L</kbd> = &lt; pivot, <kbd>R</kbd> = ≥ pivot) แล้วคลิกตำแหน่งที่ pivot ควรไปอยู่</li>
     </ul>
-    <p>มีหัวใจ 3 ดวง ตอบผิดเสียหัวใจ 1 ดวงและ −5 คะแนน ตอบถูก +10 ปุ่มใบ้ (<kbd>H</kbd>) −15 คะแนน จบด่านเร็วได้โบนัสเวลา ไม่ผิดและไม่ใช้ใบ้ได้ ★★★ ผ่านด่านแล้วด่านถัดไปจะปลดล็อก</p>
+    <p>มีหัวใจ 3 ดวง ตอบถูก +10 ตอบผิด −5 และเสียหัวใจ 1 ดวง ใช้ใบ้ (<kbd>H</kbd>) −15 จบเร็วได้โบนัสเวลา ไม่ผิดและไม่ใช้ใบ้ได้ ★★★ ผ่านด่านแล้วด่านถัดไปจะเปิด</p>
   </div>
   <div class="card">
-    <h3>🏁 โหมด 2: แข่งกับเวทมนตร์</h3>
-    <p>ชั้นของคุณและชั้นของเวทมนตร์ได้ขวดชุดเดียวกัน คลิกขวด 2 ขวดเพื่อสลับ (คลิกซ้ำเพื่อยกเลิก หรือกด <kbd>Esc</kbd>) ต้องเรียงเสร็จ <strong>ก่อน</strong> อัลกอริทึม และไม่เกินจำนวนสลับที่กำหนด สรุปผลจะบอกจำนวนสลับน้อยที่สุดที่เป็นไปได้</p>
+    <h3>โหมด 2: แข่งกับอัลกอริทึม</h3>
+    <p>คุณกับอัลกอริทึมได้ขวดชุดเดียวกัน คลิกขวด 2 ขวดเพื่อสลับ คลิกซ้ำหรือกด <kbd>Esc</kbd> เพื่อยกเลิก ต้องเรียงเสร็จก่อนอัลกอริทึม และสลับไม่เกินจำนวนที่กำหนด หน้าสรุปจะบอกจำนวนสลับน้อยที่สุดที่เป็นไปได้</p>
   </div>
   <div class="card">
-    <h3>🔮 โหมด 3: ทำนายเวทมนตร์</h3>
-    <p>ดูลักษณะข้อมูล แล้วทายว่าอัลกอริทึมไหนใช้การดำเนินการน้อยที่สุด เกมจะรันทั้ง 4 อัลกอริทึมจริงแล้วเฉลยด้วยกราฟ 10 รอบ ตอบถูก +100 และได้โบนัสตอบถูกติดกัน</p>
+    <h3>โหมด 3: ทายอัลกอริทึม</h3>
+    <p>ดูลักษณะข้อมูล แล้วทายว่าอัลกอริทึมไหนใช้การดำเนินการน้อยที่สุด เกมรันทั้ง 4 แบบจริงแล้วเฉลยด้วยกราฟ มี 10 รอบ ทายถูก +100 ถ้าถูกติดกันได้โบนัสเพิ่ม</p>
   </div>
   <div class="card">
     <h3>สัญลักษณ์บนขวด</h3>
@@ -224,25 +223,25 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
 
 <!-- เมนูหลัก -->
 <section class="screen" id="screen-menu" hidden aria-labelledby="menu-h">
-  <h2 id="menu-h">🧪 เมนูหลัก</h2>
+  <h2 id="menu-h">เมนูหลัก</h2>
   <p class="muted" id="menu-stats"></p>
   <div class="menu-grid">
-    <button type="button" class="btn menu-card" data-nav="levels"><span class="ico" aria-hidden="true">🎓</span><strong>ฝึกวิชา</strong><span class="d">เรียงขวดตามกฎของอัลกอริทึมทีละขั้น 9 ด่าน</span></button>
-    <button type="button" class="btn menu-card" data-nav="race-setup"><span class="ico" aria-hidden="true">🏁</span><strong>แข่งกับเวทมนตร์</strong><span class="d">แข่งเรียงขวดกับอัลกอริทึมที่ทำงานตรงหน้า</span></button>
-    <button type="button" class="btn menu-card" data-nav="predict"><span class="ico" aria-hidden="true">🔮</span><strong>ทำนายเวทมนตร์</strong><span class="d">ทายว่าอัลกอริทึมไหนเหมาะกับข้อมูลชุดนี้</span></button>
-    <button type="button" class="btn menu-card" data-nav="codex"><span class="ico" aria-hidden="true">📖</span><strong>สมุดตำรา</strong><span class="d">อ่านหลักการ Big-O และดูการสาธิต</span></button>
+    <button type="button" class="btn menu-card" data-nav="levels"><strong>ฝึกเรียง</strong><span class="d">เรียงขวดตามกฎของอัลกอริทึมทีละขั้น มี 9 ด่าน</span></button>
+    <button type="button" class="btn menu-card" data-nav="race-setup"><strong>แข่งกับอัลกอริทึม</strong><span class="d">เรียงขวดแข่งกับอัลกอริทึมที่ทำงานอยู่ข้าง ๆ</span></button>
+    <button type="button" class="btn menu-card" data-nav="predict"><strong>ทายอัลกอริทึม</strong><span class="d">ทายว่าอัลกอริทึมไหนเหมาะกับข้อมูลชุดนี้</span></button>
+    <button type="button" class="btn menu-card" data-nav="codex"><strong>คู่มืออัลกอริทึม</strong><span class="d">หลักการ Big-O และการสาธิตทีละขั้น</span></button>
   </div>
   <div class="row">
-    <button type="button" class="btn" data-nav="howto">📜 วิธีเล่น</button>
-    <button type="button" class="btn" id="reset-btn">♻ รีเซ็ตความคืบหน้า</button>
+    <button type="button" class="btn" data-nav="howto">วิธีเล่น</button>
+    <button type="button" class="btn" id="reset-btn">ลบความคืบหน้า</button>
     <button type="button" class="btn" data-nav="title">กลับหน้าแรก</button>
   </div>
 </section>
 
 <!-- เลือกด่าน -->
 <section class="screen" id="screen-levels" hidden aria-labelledby="levels-h">
-  <h2 id="levels-h">🎓 ฝึกวิชา: เลือกด่าน</h2>
-  <p class="muted">ผ่านด่านเพื่อปลดล็อกด่านถัดไป ด่านสุดท้ายรวมทั้ง 4 อัลกอริทึม</p>
+  <h2 id="levels-h">ฝึกเรียง: เลือกด่าน</h2>
+  <p class="muted">ผ่านด่านแล้วด่านถัดไปจะเปิด ด่านสุดท้ายใช้ทั้ง 4 อัลกอริทึม</p>
   <div class="level-grid" id="level-grid"></div>
   <div class="row" style="margin-top:1rem"><button type="button" class="btn" data-nav="menu">กลับเมนู</button></div>
 </section>
@@ -266,7 +265,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
     <div class="actions" id="tr-actions"></div>
     <div class="feedback info" id="tr-feedback" role="status" aria-live="polite"></div>
     <div class="row">
-      <button type="button" class="btn" id="tr-hint">💡 ใบ้ (−15)</button>
+      <button type="button" class="btn" id="tr-hint">ใบ้ (−15)</button>
       <button type="button" class="btn" data-nav="levels">ออกจากด่าน</button>
     </div>
   </div>
@@ -283,31 +282,31 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
 
 <!-- ตั้งค่าการแข่ง -->
 <section class="screen" id="screen-race-setup" hidden aria-labelledby="rs-h">
-  <h2 id="rs-h">🏁 แข่งกับเวทมนตร์</h2>
+  <h2 id="rs-h">แข่งกับอัลกอริทึม</h2>
   <div class="card">
-    <p>คุณและเวทมนตร์ (อัลกอริทึม) จะได้ขวดชุดเดียวกัน ใครเรียงเสร็จก่อนชนะ! แต่คุณมี <strong>จำนวนสลับจำกัด</strong> (สลับน้อยที่สุดที่เป็นไปได้ + 2) จึงต้องคิดก่อนสลับ</p>
+    <p>คุณกับอัลกอริทึมได้ขวดชุดเดียวกัน ใครเรียงเสร็จก่อนชนะ คุณสลับได้ไม่เกินจำนวนสลับน้อยที่สุดที่เป็นไปได้ + 2 ครั้ง</p>
     <fieldset><legend>จำนวนขวด</legend><div class="radio-row" id="rs-n"></div></fieldset>
-    <fieldset><legend>คู่แข่ง (อัลกอริทึม)</legend><div class="radio-row" id="rs-algo"></div></fieldset>
-    <fieldset><legend>ความเร็วของเวทมนตร์</legend><div class="radio-row" id="rs-speed"></div></fieldset>
-    <div class="row"><button type="button" class="btn primary" id="rs-start">เริ่มแข่ง!</button><button type="button" class="btn" data-nav="menu">กลับเมนู</button></div>
+    <fieldset><legend>คู่แข่ง</legend><div class="radio-row" id="rs-algo"></div></fieldset>
+    <fieldset><legend>ความเร็วของอัลกอริทึม</legend><div class="radio-row" id="rs-speed"></div></fieldset>
+    <div class="row"><button type="button" class="btn primary" id="rs-start">เริ่มแข่ง</button><button type="button" class="btn" data-nav="menu">กลับเมนู</button></div>
   </div>
 </section>
 
 <!-- การแข่ง -->
 <section class="screen" id="screen-race" hidden aria-labelledby="rc-h">
   <div class="topbar">
-    <h2 id="rc-h" tabindex="-1">🏁 การแข่งขัน</h2>
+    <h2 id="rc-h" tabindex="-1">แข่งกับอัลกอริทึม</h2>
     <div class="stats"><span class="stat" id="rc-budget"></span></div>
   </div>
   <div class="countdown" id="rc-count" aria-live="assertive"></div>
   <div class="race-grid">
     <div class="race-side">
-      <h3>🧑‍🔬 ชั้นของคุณ</h3>
+      <h3>ชั้นของคุณ</h3>
       <p class="muted" id="rc-pstat"></p>
       <div class="shelf" id="rc-pshelf"></div>
     </div>
     <div class="race-side">
-      <h3 id="rc-ai-h">🪄 ชั้นของเวทมนตร์</h3>
+      <h3 id="rc-ai-h">ชั้นของอัลกอริทึม</h3>
       <div class="counters" id="rc-astat"></div>
       <div class="shelf" id="rc-ashelf"></div>
       <p class="ai-step" id="rc-astep"></p>
@@ -320,7 +319,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
 <!-- ทำนาย -->
 <section class="screen" id="screen-predict" hidden aria-labelledby="pd-h">
   <div class="topbar">
-    <h2 id="pd-h" tabindex="-1">🔮 ทำนายเวทมนตร์</h2>
+    <h2 id="pd-h" tabindex="-1">ทายอัลกอริทึม</h2>
     <div class="stats"><span class="stat" id="pd-round"></span><span class="stat" id="pd-score"></span><span class="stat" id="pd-streak"></span></div>
   </div>
   <div class="card">
@@ -341,7 +340,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
 
 <!-- สมุดตำรา -->
 <section class="screen" id="screen-codex" hidden aria-labelledby="cx-h">
-  <h2 id="cx-h">📖 สมุดตำรา</h2>
+  <h2 id="cx-h">คู่มืออัลกอริทึม</h2>
   <div class="tabs" role="tablist" id="cx-tabs" aria-label="เลือกอัลกอริทึม"></div>
   <div class="card" role="tabpanel" id="cx-panel" tabindex="0">
     <div class="codex-grid">
@@ -352,9 +351,9 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
         <div class="shelf" id="cx-shelf"></div>
         <p class="ai-step" id="cx-step" aria-live="polite"></p>
         <div class="row">
-          <button type="button" class="btn small" id="cx-play">▶ เล่น</button>
-          <button type="button" class="btn small" id="cx-stepbtn">⏭ ทีละขั้น</button>
-          <button type="button" class="btn small" id="cx-reset">↺ รีเซ็ต</button>
+          <button type="button" class="btn small" id="cx-play">เล่น</button>
+          <button type="button" class="btn small" id="cx-stepbtn">ทีละขั้น</button>
+          <button type="button" class="btn small" id="cx-reset">เริ่มใหม่</button>
         </div>
       </div>
     </div>
@@ -388,7 +387,7 @@ function shuffleInPlace(a, rng) {
 
 // ===== SORTING ALGORITHMS =====
 /*
- * หัวใจของเกม: อัลกอริทึมเรียงลำดับทั้ง 4 แบบ "ติดเครื่องมือวัด" (instrumented)
+ * อัลกอริทึมเรียงลำดับ 4 แบบ แบบ "ติดเครื่องมือวัด" (instrumented)
  * ---------------------------------------------------------------------------
  * ทุกฟังก์ชันรับอาร์เรย์ input (ไม่แก้ไขต้นฉบับ) แล้วคืนค่า
  *   { algo, input, sorted, steps, comparisons, swaps, writes }
@@ -415,10 +414,10 @@ function shuffleInPlace(a, rng) {
  *   {type:'done'}                  จบการทำงาน (เป็น step สุดท้ายเสมอ)
  *
  * รายการขั้นตอนนี้คือ "แหล่งความจริงเดียว" ที่ขับเคลื่อนทุกโหมด:
- *   - โหมดฝึกวิชา  : แปลง steps เป็น "จุดตัดสินใจ" แล้วตรวจว่าผู้เล่นทำตรงกับ step ถัดไปหรือไม่
- *   - โหมดแข่ง     : ชั้นของเวทมนตร์เล่น steps ทีละขั้นด้วย applyStep พร้อมไฮไลต์
- *   - โหมดทำนาย    : รันทั้ง 4 อัลกอริทึมกับข้อมูลเดียวกันแล้วอ่านตัวนับจริงมาเทียบ
- *   - สมุดตำรา      : สาธิตด้วยการเล่น steps บนข้อมูลตัวอย่าง
+ *   - โหมดฝึกเรียง : แปลง steps เป็น "จุดตัดสินใจ" แล้วตรวจว่าผู้เล่นทำตรงกับ step ถัดไปหรือไม่
+ *   - โหมดแข่ง     : ชั้นของอัลกอริทึมเล่น steps ทีละขั้นด้วย applyStep พร้อมไฮไลต์
+ *   - โหมดทาย      : รันทั้ง 4 อัลกอริทึมกับข้อมูลเดียวกันแล้วอ่านตัวนับจริงมาเทียบ
+ *   - คู่มือ         : สาธิตด้วยการเล่น steps บนข้อมูลตัวอย่าง
  */
 
 // ห่อผลลัพธ์ให้อยู่ในรูปแบบเดียวกันทุกอัลกอริทึม และเติม step 'done' ปิดท้าย
@@ -580,7 +579,7 @@ function quickSort(input) {
 
 /*
  * applyStep: ทำ step หนึ่งขั้นกับอาร์เรย์ (แก้ไขอาร์เรย์ที่ส่งเข้ามา)
- * ใช้ร่วมกันทั้งแอนิเมชันโหมดแข่ง, สมุดตำรา, โหมดฝึก และชุดทดสอบ → การเล่นซ้ำมีที่มาเดียว
+ * ใช้ร่วมกันทั้งแอนิเมชันโหมดแข่ง, คู่มือ, โหมดฝึก และชุดทดสอบ → การเล่นซ้ำมีที่มาเดียว
  * ctx เก็บสถานะของ Insertion Sort: key ที่ยกขึ้นมา และตำแหน่งช่องว่าง (hole)
  */
 function applyStep(arr, step, ctx) {
@@ -608,10 +607,10 @@ function countOps(r) {
 }
 // ทะเบียนอัลกอริทึม: ทุกโหมดเรียกใช้ผ่านที่นี่ (อัลกอริทึมชุดเดียวกันทั้งเกม)
 const ALGORITHMS = {
-  bubble:    { key: 'bubble',    fn: bubbleSort,    nameEn: 'Bubble Sort',    nameTh: 'เรียงแบบฟองสบู่', icon: '🫧', best: 'O(n)',       avg: 'O(n²)',      worst: 'O(n²)', space: 'O(1)',     stable: true },
-  selection: { key: 'selection', fn: selectionSort, nameEn: 'Selection Sort', nameTh: 'เรียงแบบเลือก',   icon: '🎯', best: 'O(n²)',      avg: 'O(n²)',      worst: 'O(n²)', space: 'O(1)',     stable: false },
-  insertion: { key: 'insertion', fn: insertionSort, nameEn: 'Insertion Sort', nameTh: 'เรียงแบบแทรก',    icon: '🃏', best: 'O(n)',       avg: 'O(n²)',      worst: 'O(n²)', space: 'O(1)',     stable: true },
-  quick:     { key: 'quick',     fn: quickSort,     nameEn: 'Quick Sort',     nameTh: 'เรียงแบบเร็ว',    icon: '⚡', best: 'O(n log n)', avg: 'O(n log n)', worst: 'O(n²)', space: 'O(log n)–O(n)', stable: false }
+  bubble:    { key: 'bubble',    fn: bubbleSort,    nameEn: 'Bubble Sort',    nameTh: 'เรียงแบบฟองสบู่', best: 'O(n)',       avg: 'O(n²)',      worst: 'O(n²)', space: 'O(1)',     stable: true },
+  selection: { key: 'selection', fn: selectionSort, nameEn: 'Selection Sort', nameTh: 'เรียงแบบเลือก',   best: 'O(n²)',      avg: 'O(n²)',      worst: 'O(n²)', space: 'O(1)',     stable: false },
+  insertion: { key: 'insertion', fn: insertionSort, nameEn: 'Insertion Sort', nameTh: 'เรียงแบบแทรก',    best: 'O(n)',       avg: 'O(n²)',      worst: 'O(n²)', space: 'O(1)',     stable: true },
+  quick:     { key: 'quick',     fn: quickSort,     nameEn: 'Quick Sort',     nameTh: 'เรียงแบบเร็ว',    best: 'O(n log n)', avg: 'O(n log n)', worst: 'O(n²)', space: 'O(log n)–O(n)', stable: false }
 };
 const ALGO_KEYS = ['bubble', 'selection', 'insertion', 'quick'];
 // ===== END SORTING ALGORITHMS =====
@@ -666,7 +665,7 @@ function generateData(shape, n, rng, allowSorted) {
   return a;
 }
 
-// ---- คำอธิบาย step เป็นภาษาไทย (ใช้ในโหมดแข่ง สมุดตำรา และข้อความหลังตอบถูก) ----
+// ---- คำอธิบาย step เป็นภาษาไทย (ใช้ในโหมดแข่ง คู่มือ และข้อความหลังตอบถูก) ----
 // a = สถานะอาร์เรย์ "ก่อน" ทำ step นี้, ctx = สถานะ key ของ Insertion Sort
 function stepText(algo, st, a, ctx) {
   ctx = ctx || {};
@@ -681,13 +680,13 @@ function stepText(algo, st, a, ctx) {
     case 'insert': return `วาง key ${st.value} ลงที่ตำแหน่ง ${st.i}`;
     case 'pivot': return `เลือก pivot = ${a[st.i]} (ตัวสุดท้ายของช่วง ${st.lo}–${st.hi})`;
     case 'markSorted':
-      if (algo === 'bubble' && st.from === 0 && st.to > 0) return 'รอบนี้ไม่มีการสลับเลย แปลว่าเรียงแล้ว — Bubble Sort หยุดก่อนได้ (early exit)';
+      if (algo === 'bubble' && st.from === 0 && st.to > 0) return 'รอบนี้ไม่มีการสลับ แปลว่าเรียงแล้ว Bubble Sort จึงหยุดก่อน (early exit)';
       if (algo === 'insertion' && st.to > 0) return `ส่วนซ้าย ตำแหน่ง 0–${st.to} เรียงแล้ว`;
-      return st.from === st.to ? `ตำแหน่ง ${st.from} เข้าที่แล้ว ✓` : `ตำแหน่ง ${st.from}–${st.to} เข้าที่แล้ว ✓`;
+      return st.from === st.to ? `ตำแหน่ง ${st.from} เข้าที่แล้ว` : `ตำแหน่ง ${st.from}–${st.to} เข้าที่แล้ว`;
     case 'passStart': return `เริ่มรอบที่ ${st.pass + 1} (เปรียบเทียบคู่ติดกันถึงตำแหน่ง ${st.end})`;
     case 'selectStart': return `หาค่าน้อยที่สุดในช่วงตำแหน่ง ${st.i}–${a.length - 1}`;
     case 'minFound': return st.min === st.i ? `ค่าน้อยสุด ${a[st.min]} อยู่ที่เดิมแล้ว ไม่ต้องสลับ` : `ค่าน้อยสุดคือ ${a[st.min]} ที่ตำแหน่ง ${st.min}`;
-    case 'done': return 'เรียงเสร็จสมบูรณ์! 🎉';
+    case 'done': return 'เรียงเสร็จแล้ว';
     default: return '';
   }
 }
@@ -705,7 +704,7 @@ function summarizeSteps(algo, steps, from, to, a0, ctx0) {
     else if (['swap', 'minFound', 'markSorted', 'pivot', 'passStart', 'done'].includes(st.type)) out.push(stepText(algo, st, a, ctx));
     applyStep(a, st, ctx);
   }
-  return out.join(' • ');
+  return out.join(', ');
 }
 
 /*
@@ -781,7 +780,7 @@ function buildDecisions(algo, input) {
 // ตรวจคำตอบของผู้เล่นเทียบกับ step ที่อัลกอริทึมจริงจะทำ → {ok, message(ไทย)}
 function validate(d, ans) {
   const c = d.ctx;
-  if (ans === d.expected) return { ok: true, message: 'ถูกต้อง! ✓' };
+  if (ans === d.expected) return { ok: true, message: '✓ ถูกต้อง' };
   switch (d.kind) {
     case 'swapOrPass':
       if (ans === 'swap') return { ok: false, message: `Bubble Sort สลับเมื่อซ้ายมากกว่าขวาเท่านั้น (${c.left} ≤ ${c.right} จึงไม่ต้องสลับ)` };
@@ -819,7 +818,7 @@ function hintFor(d) {
     case 'pickSlot': text = `วาง key ${c.keyValue} ที่ตำแหน่ง ${d.expected}` + (d.expected === c.i ? ' (อยู่ที่เดิม)' : ''); break;
     case 'lessOrNot': text = d.expected === 'less' ? `${c.value} < ${c.pivotValue} → ไปฝั่ง < pivot` : `${c.value} ≥ ${c.pivotValue} → อยู่ฝั่ง ≥ pivot`; break;
   }
-  return { target: d.expected, text: '💡 ใบ้: ' + text };
+  return { target: d.expected, text: 'ใบ้: ' + text };
 }
 // ข้อความอธิบาย "ขั้นตอนตอนนี้" สำหรับแผงคำอธิบาย
 function explainStep(d) {
