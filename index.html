@@ -115,7 +115,7 @@ legend{color:var(--accent);font-weight:700;padding:0 .3rem}
 .radio-row input{accent-color:var(--accent);width:1.1rem;height:1.1rem}
 .radio-row label:has(input:checked){border-color:var(--accent)}
 
-/* โหมดทำนาย */
+/* โหมดทาย */
 .choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin:.6rem 0}
 .choices .btn{text-align:left}
 .choices .btn:disabled{opacity:1;cursor:default}
@@ -133,7 +133,7 @@ th{background:var(--panel2);color:var(--accent)}
 tr.win td{background:rgba(126,232,160,.12);font-weight:700}
 .table-wrap{overflow-x:auto}
 
-/* ผลลัพธ์ / สมุดตำรา */
+/* ผลลัพธ์ / คู่มือ */
 .stars{font-size:2.4rem;color:var(--accent);letter-spacing:6px;text-align:center}
 .result-list{list-style:none;padding:0;margin:.5rem 0}
 .result-list li{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px dashed var(--line);padding:.3rem 0}
@@ -316,7 +316,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
   <div class="row"><button type="button" class="btn" id="rc-quit">ยอมแพ้ / ออก</button></div>
 </section>
 
-<!-- ทำนาย -->
+<!-- ทายอัลกอริทึม -->
 <section class="screen" id="screen-predict" hidden aria-labelledby="pd-h">
   <div class="topbar">
     <h2 id="pd-h" tabindex="-1">ทายอัลกอริทึม</h2>
@@ -338,7 +338,7 @@ kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:3p
   <div class="row"><button type="button" class="btn" data-nav="menu">ออกไปเมนู</button></div>
 </section>
 
-<!-- สมุดตำรา -->
+<!-- คู่มืออัลกอริทึม -->
 <section class="screen" id="screen-codex" hidden aria-labelledby="cx-h">
   <h2 id="cx-h">คู่มืออัลกอริทึม</h2>
   <div class="tabs" role="tablist" id="cx-tabs" aria-label="เลือกอัลกอริทึม"></div>
@@ -616,7 +616,7 @@ const ALGO_KEYS = ['bubble', 'selection', 'insertion', 'quick'];
 // ===== END SORTING ALGORITHMS =====
 
 // ===== GAME LOGIC (PURE) =====
-// ตรรกะของเกมที่ไม่แตะ DOM: สร้างข้อมูล, ตรวจคำตอบ, คิดคะแนน, ด่าน, โหมดแข่ง/ทำนาย
+// ตรรกะของเกมที่ไม่แตะ DOM: สร้างข้อมูล, ตรวจคำตอบ, คิดคะแนน, ด่าน, โหมดแข่ง/ทาย
 
 // ---- ตัวสร้างข้อมูลตามรูปแบบ (shape) ----
 function distinctValues(n, rng) {
@@ -824,12 +824,12 @@ function hintFor(d) {
 function explainStep(d) {
   const c = d.ctx;
   switch (d.kind) {
-    case 'swapOrPass': return `รอบที่ ${c.pass + 1}: เปรียบเทียบขวดคู่ติดกัน ${c.left} (ตำแหน่ง ${c.j}) กับ ${c.right} (ตำแหน่ง ${c.j + 1}) — ถ้าซ้ายมากกว่าขวาให้กด "สลับ" ถ้าไม่ใช่ให้กด "ไม่สลับ"`;
+    case 'swapOrPass': return `รอบที่ ${c.pass + 1}: เทียบ ${c.left} (ตำแหน่ง ${c.j}) กับ ${c.right} (ตำแหน่ง ${c.j + 1}) ถ้าซ้ายมากกว่าขวาให้กด "สลับ" ถ้าไม่ใช่ให้กด "ไม่สลับ"`;
     case 'pickIndex':
-      if (d.sub === 'selectMin') return `รอบที่ ${c.i + 1}: คลิกขวดที่มีพลังน้อยที่สุดในส่วนที่ยังไม่เรียง (ตำแหน่ง ${c.lo}–${c.hi}) แล้วขวดนั้นจะถูกสลับมาไว้ที่ตำแหน่ง ${c.i}`;
-      return `เปรียบเทียบครบทั้งช่วง ${c.lo}–${c.hi} แล้ว มีขวดที่น้อยกว่า pivot ${c.pivotValue} อยู่ ${c.lessCount} ขวด (แถบสีม่วง) — คลิกตำแหน่งที่ pivot ควรไปอยู่`;
-    case 'pickSlot': return `ยกขวด ${c.keyValue} (ตำแหน่ง ${c.i}) ขึ้นเป็น key ⬆ — คลิกช่อง ⤓ ที่จะวาง key ในส่วนซ้ายที่เรียงแล้ว (ตำแหน่ง 0–${c.i}) ขวดที่มากกว่า key จะเลื่อนไปทางขวา`;
-    case 'lessOrNot': return `pivot ★ = ${c.pivotValue} (ช่วง ${c.lo}–${c.hi}) — ขวด ${c.value} (ตำแหน่ง ${c.j}) น้อยกว่า pivot หรือไม่?`;
+      if (d.sub === 'selectMin') return `รอบที่ ${c.i + 1}: คลิกขวดที่น้อยที่สุดในส่วนที่ยังไม่เรียง (ตำแหน่ง ${c.lo}–${c.hi}) ขวดนั้นจะถูกสลับมาที่ตำแหน่ง ${c.i}`;
+      return `เทียบครบช่วง ${c.lo}–${c.hi} แล้ว มี ${c.lessCount} ขวดที่น้อยกว่า pivot ${c.pivotValue} (แถบสีม่วง) คลิกตำแหน่งที่ pivot ควรไปอยู่`;
+    case 'pickSlot': return `ขวด ${c.keyValue} (ตำแหน่ง ${c.i}) ถูกยกขึ้นเป็น key ⬆ คลิกช่อง ⤓ ในส่วนซ้ายที่เรียงแล้ว (ตำแหน่ง 0–${c.i}) ขวดที่มากกว่า key จะเลื่อนไปทางขวา`;
+    case 'lessOrNot': return `pivot ★ = ${c.pivotValue} (ช่วง ${c.lo}–${c.hi}) ขวด ${c.value} (ตำแหน่ง ${c.j}) น้อยกว่า pivot หรือไม่`;
     default: return '';
   }
 }
@@ -847,23 +847,23 @@ function starsFor(mistakes, hints) {
 
 // ---- ด่านของโหมดฝึก ----
 const LEVELS = [
-  { id: 1, title: 'ฟองสบู่ลอยขึ้น', stages: [{ algo: 'bubble', n: 5, shape: 'random' }] },
-  { id: 2, title: 'ฟองสบู่กับขวดเกือบเรียง', stages: [{ algo: 'bubble', n: 7, shape: 'nearlySorted' }], tip: 'ข้อมูลเกือบเรียงแล้ว สังเกตว่า Bubble Sort หยุดก่อนได้ (early exit) เมื่อรอบไหนไม่มีการสลับ' },
-  { id: 3, title: 'เลือกขวดที่เบาที่สุด', stages: [{ algo: 'selection', n: 6, shape: 'random' }] },
-  { id: 4, title: 'ขวดแฝดเต็มชั้น', stages: [{ algo: 'selection', n: 8, shape: 'manyDuplicates' }], tip: 'มีค่าซ้ำเยอะ อย่าลืมเลือกขวดค่าน้อยสุด "ตัวแรก" (ซ้ายสุด)' },
-  { id: 5, title: 'แทรกขวดเข้าที่', stages: [{ algo: 'insertion', n: 6, shape: 'random' }] },
-  { id: 6, title: 'แทรกอย่างมั่นคง', stages: [{ algo: 'insertion', n: 8, shape: 'nearlySortedDup' }], tip: 'เกือบเรียงและมีค่าซ้ำ: key ที่เท่ากับค่าทางซ้ายต้องวางไว้หลัง (stable)' },
-  { id: 7, title: 'แบ่งชั้นด้วย pivot', stages: [{ algo: 'quick', n: 6, shape: 'random' }] },
-  { id: 8, title: 'พายุแห่ง Quick Sort', stages: [{ algo: 'quick', n: 8, shape: 'random' }] },
-  { id: 9, title: 'บททดสอบนักเล่นแร่แปรธาตุ', final: true, stages: [
+  { id: 1, title: 'ขวดสุ่ม 5 ขวด', stages: [{ algo: 'bubble', n: 5, shape: 'random' }] },
+  { id: 2, title: 'ขวดเกือบเรียง', stages: [{ algo: 'bubble', n: 7, shape: 'nearlySorted' }], tip: 'ข้อมูลเกือบเรียงแล้ว ดูว่า Bubble Sort หยุดก่อนเมื่อรอบไหนไม่มีการสลับ (early exit)' },
+  { id: 3, title: 'ขวดสุ่ม 6 ขวด', stages: [{ algo: 'selection', n: 6, shape: 'random' }] },
+  { id: 4, title: 'ค่าซ้ำเยอะ', stages: [{ algo: 'selection', n: 8, shape: 'manyDuplicates' }], tip: 'มีค่าซ้ำเยอะ ให้เลือกขวดค่าน้อยสุดตัวแรก (ซ้ายสุด)' },
+  { id: 5, title: 'ขวดสุ่ม 6 ขวด', stages: [{ algo: 'insertion', n: 6, shape: 'random' }] },
+  { id: 6, title: 'เกือบเรียงและมีค่าซ้ำ', stages: [{ algo: 'insertion', n: 8, shape: 'nearlySortedDup' }], tip: 'key ที่เท่ากับค่าทางซ้ายต้องวางไว้หลังค่านั้น (stable)' },
+  { id: 7, title: 'ขวดสุ่ม 6 ขวด', stages: [{ algo: 'quick', n: 6, shape: 'random' }] },
+  { id: 8, title: 'ขวดสุ่ม 8 ขวด', stages: [{ algo: 'quick', n: 8, shape: 'random' }] },
+  { id: 9, title: 'ด่านรวม 4 อัลกอริทึม', final: true, stages: [
     { algo: 'bubble', n: 5, shape: 'random' }, { algo: 'selection', n: 5, shape: 'random' },
     { algo: 'insertion', n: 5, shape: 'random' }, { algo: 'quick', n: 5, shape: 'random' }] }
 ];
 const ALGO_RULES = {
-  bubble: 'เปรียบเทียบขวดคู่ที่อยู่ติดกันจากซ้ายไปขวา ถ้าขวดซ้ายมีพลัง "มากกว่า" ขวดขวาให้กด "สลับ" ไม่เช่นนั้นกด "ไม่สลับ" จบแต่ละรอบ ขวดที่มากที่สุดจะลอยไปอยู่ท้ายสุด (เหมือนฟองสบู่) รอบถัดไปจึงสั้นลง และถ้ารอบไหนไม่มีการสลับเลย แปลว่าเรียงแล้ว อัลกอริทึมจะหยุดทันที (early exit)',
-  selection: 'ในแต่ละรอบ ให้คลิกขวดที่มีพลัง "น้อยที่สุด" ในส่วนที่ยังไม่เรียง (ถ้ามีค่าเท่ากัน ให้เลือกขวดซ้ายสุด เพราะเป็นตัวแรกที่สแกนเจอ) ขวดนั้นจะถูกสลับมาไว้ตำแหน่งแรกของส่วนที่ยังไม่เรียง',
-  insertion: 'ขวดถัดไปจะถูกยกขึ้นเป็น key ⬆ ให้คลิกช่อง ⤓ ที่ key ควรแทรกลงไปในส่วนซ้ายที่เรียงแล้ว ขวดที่มากกว่า key จะเลื่อนไปทางขวา ถ้าเจอค่าที่เท่ากัน ให้วาง key ไว้หลังค่านั้น (stable)',
-  quick: 'ขวดสุดท้ายของช่วงคือ pivot ★ ไล่ดูขวดทีละขวดจากซ้าย ถ้าน้อยกว่า pivot กด "< pivot" (ขวดจะถูกย้ายเข้าโซนซ้าย แถบม่วง) ถ้ามากกว่าหรือเท่ากับกด "≥ pivot" เมื่อครบแล้วให้คลิกตำแหน่งที่ pivot ควรไปอยู่ (ถัดจากโซนที่น้อยกว่า) แล้วทำซ้ำกับฝั่งซ้ายและขวา'
+  bubble: 'เทียบขวดคู่ที่ติดกันจากซ้ายไปขวา ถ้าซ้ายมากกว่าขวาให้กด "สลับ" ไม่เช่นนั้นกด "ไม่สลับ" จบแต่ละรอบ ขวดที่มากที่สุดจะไปอยู่ท้ายสุด รอบถัดไปจึงสั้นลง ถ้ารอบไหนไม่มีการสลับ แปลว่าเรียงแล้ว อัลกอริทึมจะหยุด (early exit)',
+  selection: 'แต่ละรอบ ให้คลิกขวดที่น้อยที่สุดในส่วนที่ยังไม่เรียง ถ้ามีค่าเท่ากันให้เลือกขวดซ้ายสุด เพราะเป็นตัวแรกที่สแกนเจอ ขวดนั้นจะถูกสลับมาไว้หน้าสุดของส่วนที่ยังไม่เรียง',
+  insertion: 'ขวดถัดไปจะถูกยกขึ้นเป็น key ⬆ ให้คลิกช่อง ⤓ ที่ key ควรอยู่ในส่วนซ้ายที่เรียงแล้ว ขวดที่มากกว่า key จะเลื่อนไปทางขวา ถ้าเจอค่าที่เท่ากัน ให้วาง key ไว้หลังค่านั้น (stable)',
+  quick: 'ขวดสุดท้ายของช่วงคือ pivot ★ ดูขวดทีละขวดจากซ้าย ถ้าน้อยกว่า pivot กด "< pivot" ขวดจะย้ายเข้าโซนซ้าย (แถบม่วง) ถ้ามากกว่าหรือเท่ากับกด "≥ pivot" ครบแล้วให้คลิกตำแหน่งที่ pivot ควรอยู่ คือถัดจากโซนที่น้อยกว่า จากนั้นทำซ้ำกับฝั่งซ้ายและขวา'
 };
 
 // ---- โหมดแข่ง: จำนวนสลับน้อยที่สุด ----
@@ -890,7 +890,7 @@ function minSwapsToSort(arr) {
 }
 function raceBudget(arr) { return minSwapsToSort(arr).minSwaps + 2; }
 
-// ---- โหมดทำนาย ----
+// ---- โหมดทาย ----
 // รันทั้ง 4 อัลกอริทึมจริงกับข้อมูลชุดเดียวกัน แล้วหาว่าตัวไหนใช้ metric น้อยที่สุด (เสมอได้หลายตัว)
 function evaluatePrediction(data, metric) {
   const per = {}, values = {};
@@ -919,36 +919,36 @@ function makePredictRounds(seed) {
   return PREDICT_PLAN.map((p, idx) => ({
     index: idx, shape: p.shape, shapeTh: SHAPE_TH[p.shape], n: p.n, metric: p.metric,
     data: generateData(p.shape, p.n, rng, p.shape === 'sorted'),
-    question: `อัลกอริทึมไหนใช้${METRIC_TH[p.metric]} น้อยที่สุด?`
+    question: `อัลกอริทึมไหนใช้${METRIC_TH[p.metric]} น้อยที่สุด`
   }));
 }
 // คำอธิบายเฉลย: ใช้ตัวเลขจริงจากการรัน + เหตุผลตามลักษณะข้อมูล
 function explainPrediction(round, ev) {
   const nm = k => ALGORITHMS[k].nameEn;
   const list = ALGO_KEYS.map(k => `${nm(k)} = ${ev.values[k]}`).join(', ');
-  let s = `ผลจริง (${METRIC_TH[ev.metric]}): ${list}. ผู้ชนะ: ${ev.winners.map(nm).join(' และ ')}` + (ev.winners.length > 1 ? ' (เสมอกัน ตอบตัวใดก็ถูก)' : '') + '. ';
+  let s = `ผลจริง (${METRIC_TH[ev.metric]}): ${list} น้อยที่สุดคือ ${ev.winners.map(nm).join(' และ ')}` + (ev.winners.length > 1 ? ' (เสมอกัน ตอบตัวไหนก็ถูก)' : '') + ' ';
   const n = round.n;
   const insight = {
-    sorted: `ข้อมูลเรียงแล้ว: Insertion Sort และ Bubble Sort (มี early exit) เปรียบเทียบแค่ n−1 = ${n - 1} ครั้งแล้วจบ จึงเป็น O(n) ส่วน Quick Sort ที่ใช้ตัวสุดท้ายเป็น pivot แบ่งได้ข้างเดียวทุกครั้ง กลายเป็นกรณีแย่สุด O(n²) (${ev.per.quick.comparisons} การเปรียบเทียบ)`,
-    nearlySorted: `ข้อมูลเกือบเรียง: Insertion Sort เลื่อนขวดเพียงไม่กี่ครั้ง (เขียน ${ev.per.insertion.writes} ครั้ง) จึงใกล้เคียง O(n) ส่วน Selection Sort ต้องเปรียบเทียบครบ n(n−1)/2 = ${n * (n - 1) / 2} ครั้งเสมอ`,
-    reversed: `ข้อมูลกลับด้านเป็นกรณีแย่สุดของ Bubble/Insertion: ทุกคู่กลับด้านหมด (${n * (n - 1) / 2} คู่) ต้องสลับ/เลื่อนทุกคู่ ส่วน Selection Sort สลับไม่เกิน n−1 ครั้ง (ครั้งนี้ ${ev.per.selection.swaps} ครั้ง) และ Quick Sort ที่ใช้ pivot ตัวสุดท้ายก็แบ่งไม่สมดุล`,
-    random: n <= 5 ? 'ข้อมูลน้อยมาก (n เล็ก): ความต่างของ Big-O แทบไม่มีผล อัลกอริทึมง่าย ๆ อย่าง Insertion Sort มักทำได้ดีพอ ๆ กันหรือดีกว่า' : `ข้อมูลสุ่ม: Quick Sort มักแบ่งได้ค่อนข้างสมดุล เฉลี่ย O(n log n) ส่วน Bubble/Insertion/Selection เป็น O(n²) ความต่างจะชัดขึ้นเมื่อ n ใหญ่ขึ้น`,
-    manyDuplicates: 'ค่าซ้ำกันเยอะ: Lomuto Quick Sort ส่งค่าที่เท่ากับ pivot ไปฝั่งขวาทั้งหมด จึงแบ่งไม่สมดุล ส่วน Insertion Sort ไม่ต้องเลื่อนค่าที่เท่ากัน (stable) จึงประหยัดการเขียน'
+    sorted: `ข้อมูลเรียงแล้ว: Insertion Sort และ Bubble Sort (มี early exit) เปรียบเทียบแค่ n−1 = ${n - 1} ครั้งแล้วจบ เป็น O(n) ส่วน Quick Sort ที่ใช้ตัวสุดท้ายเป็น pivot แบ่งได้ข้างเดียวทุกครั้ง จึงเป็นกรณีแย่สุด O(n²) (เปรียบเทียบ ${ev.per.quick.comparisons} ครั้ง)`,
+    nearlySorted: `ข้อมูลเกือบเรียง: Insertion Sort เลื่อนขวดไม่กี่ครั้ง (เขียน ${ev.per.insertion.writes} ครั้ง) จึงใกล้ O(n) ส่วน Selection Sort เปรียบเทียบ n(n−1)/2 = ${n * (n - 1) / 2} ครั้งเสมอ`,
+    reversed: `ข้อมูลกลับด้านเป็นกรณีแย่สุดของ Bubble และ Insertion: ทั้ง ${n * (n - 1) / 2} คู่กลับลำดับ ต้องสลับหรือเลื่อนทุกคู่ Selection Sort สลับไม่เกิน n−1 ครั้ง (รอบนี้ ${ev.per.selection.swaps} ครั้ง) และ Quick Sort ที่ใช้ pivot ตัวสุดท้ายก็แบ่งไม่สมดุล`,
+    random: n <= 5 ? 'ข้อมูลน้อย (n เล็ก): Big-O แทบไม่ต่างกัน อัลกอริทึมง่าย ๆ อย่าง Insertion Sort มักทำได้พอ ๆ กันหรือดีกว่า' : `ข้อมูลสุ่ม: Quick Sort มักแบ่งได้ค่อนข้างสมดุล เฉลี่ย O(n log n) ส่วน Bubble, Insertion และ Selection เป็น O(n²) ยิ่ง n มาก ความต่างยิ่งชัด`,
+    manyDuplicates: 'ค่าซ้ำเยอะ: Lomuto Quick Sort ส่งค่าที่เท่ากับ pivot ไปฝั่งขวาทั้งหมด จึงแบ่งไม่สมดุล ส่วน Insertion Sort ไม่เลื่อนค่าที่เท่ากัน (stable) จึงเขียนน้อยกว่า'
   }[round.shape] || '';
   // ข้อมูลเกือบเรียง + นับเฉพาะการย้าย: Insertion ต้อง "เลื่อน" แล้ว "วาง key" (2 การเขียนต่อคู่ที่กลับด้าน)
   // จึงแพ้ Bubble/Selection ที่สลับคู่ติดกันครั้งเดียว — เปลี่ยนคำอธิบายให้ตรงกับตัวชี้วัด
-  const movesNearly = `ข้อมูลเกือบเรียง แต่รอบนี้นับเฉพาะการย้าย: Insertion Sort ต้องเลื่อนขวดแล้ววาง key กลับ (เขียน ${ev.per.insertion.writes} ครั้ง) จึงเขียนมากกว่าการสลับคู่ติดกันครั้งเดียวของ Bubble/Selection แม้ Insertion จะเปรียบเทียบน้อยและเร็วโดยรวมก็ตาม`;
+  const movesNearly = `ข้อมูลเกือบเรียง แต่รอบนี้นับเฉพาะการย้าย: Insertion Sort ต้องเลื่อนขวดแล้ววาง key กลับ (เขียน ${ev.per.insertion.writes} ครั้ง) ซึ่งมากกว่าการสลับคู่ติดกันครั้งเดียวของ Bubble และ Selection ถึง Insertion จะเปรียบเทียบน้อยกว่าก็ตาม`;
   s += (round.shape === 'nearlySorted' && ev.metric === 'moves') ? movesNearly : insight;
-  if (ev.metric === 'moves') s += ' (นับการสลับ 1 ครั้ง = 1 การย้าย และการเลื่อน/วาง key ของ Insertion Sort = 1 การเขียนต่อครั้ง)';
+  if (ev.metric === 'moves') s += ' (สลับ 1 ครั้ง = 1 การย้าย การเลื่อนหรือวาง key ของ Insertion Sort = 1 การเขียน)';
   return s;
 }
 const PREDICT_POINTS = { correct: 100, streakBonus: 20 };
 function predictPoints(streak) { return PREDICT_POINTS.correct + PREDICT_POINTS.streakBonus * Math.max(0, streak - 1); }
 function rankTitle(score) {
-  if (score >= 1300) return 'ปรมาจารย์แห่งเวทเรียงลำดับ';
-  if (score >= 800) return 'นักเล่นแร่แปรธาตุ';
-  if (score >= 400) return 'นักปรุงยา';
-  return 'ผู้ฝึกหัด';
+  if (score >= 1300) return 'เชี่ยวชาญ';
+  if (score >= 800) return 'ดี';
+  if (score >= 400) return 'พอใช้';
+  return 'เริ่มต้น';
 }
 // ===== END GAME LOGIC (PURE) =====
 
@@ -1164,7 +1164,7 @@ function renderTitle() {
 function renderMenu() {
   const p = state.progress;
   const stars = Object.values(p.stars).reduce((s, v) => s + (Number(v) || 0), 0);
-  $('#menu-stats').textContent = `ดาวสะสม ★ ${stars}/${LEVELS.length * 3} • ปลดล็อกถึงด่าน ${p.unlocked} • ชนะการแข่ง ${p.raceWins} ครั้ง • คะแนนทำนายสูงสุด ${p.predictBest}`;
+  $('#menu-stats').textContent = `ดาว ${stars}/${LEVELS.length * 3}, เปิดถึงด่าน ${p.unlocked}, ชนะการแข่ง ${p.raceWins} ครั้ง, คะแนนโหมดทายสูงสุด ${p.predictBest}`;
 }
 function renderLevels() {
   const grid = $('#level-grid'); grid.textContent = '';
@@ -1176,7 +1176,7 @@ function renderLevels() {
     const label = locked ? `ด่าน ${L.id} ${L.title} (ล็อกอยู่)` : `ด่าน ${L.id} ${L.title}, ${algoName}, ได้ ${stars} ดาว` + (best != null ? `, คะแนนสูงสุด ${best}` : '');
     grid.append(h('button', { type: 'button', class: 'btn level-btn', disabled: locked, 'aria-label': label,
       onclick: () => { showScreen('training'); state.mode = Training; Training.start(L.id); } },
-      h('span', { class: 'lv', text: (locked ? '🔒 ' : (L.final ? '🏆 ' : '')) + `ด่าน ${L.id}`, 'aria-hidden': 'true' }),
+      h('span', { class: 'lv', text: `ด่าน ${L.id}` + (locked ? ' (ล็อก)' : ''), 'aria-hidden': 'true' }),
       h('span', { 'aria-hidden': 'true', text: L.title }),
       h('span', { class: 'muted', 'aria-hidden': 'true', text: algoName }),
       h('span', { class: 'st', 'aria-hidden': 'true', text: '★'.repeat(stars) + '☆'.repeat(3 - stars) }),
@@ -1198,7 +1198,7 @@ function showResult(cfg) {
 
 // ===== MODE 1: TRAINING =====
 /*
- * โหมดฝึกวิชา: ผู้เล่น "เป็น" อัลกอริทึมเอง
+ * โหมดฝึกเรียง: ผู้เล่น "เป็น" อัลกอริทึมเอง
  * buildDecisions() คำนวณ step จริงไว้ล่วงหน้า → ทุกคำตอบถูกตรวจกับ step ถัดไปด้วย validate()
  * ตอบถูก: เล่น step ในช่วง [fromStep, toStep) ด้วย applyStep (ตัวนับเพิ่มตาม step จริง)
  */
@@ -1212,10 +1212,10 @@ const Training = (() => {
     $('#tr-intro').hidden = false; $('#tr-play').hidden = true;
     const body = $('#tr-intro-body'); body.textContent = '';
     const algos = L.stages.map(s => s.algo);
-    if (L.final) body.append(h('p', { text: 'ด่านสุดท้าย: เรียงขวด 4 ชั้นติดกัน ด้วย Bubble → Selection → Insertion → Quick Sort โดยใช้หัวใจ 3 ดวงร่วมกัน' }));
-    for (const a of algos) body.append(h('p', null, h('strong', { text: `${ALGORITHMS[a].icon} ${ALGORITHMS[a].nameEn}: ` }), ALGO_RULES[a]));
-    if (L.tip) body.append(h('p', { class: 'muted', text: '💡 ' + L.tip }));
-    body.append(h('p', { class: 'muted', text: 'ตอบถูก +10 • ตอบผิด −5 และเสียหัวใจ • ใบ้ −15 • คีย์ลัด: S = สลับ, P = ไม่สลับ, L = < pivot, R = ≥ pivot, H = ใบ้' }));
+    if (L.final) body.append(h('p', { text: 'ด่านนี้มี 4 ชั้น เรียงตามลำดับด้วย Bubble, Selection, Insertion และ Quick Sort ใช้หัวใจ 3 ดวงร่วมกัน' }));
+    for (const a of algos) body.append(h('p', null, h('strong', { text: `${ALGORITHMS[a].nameEn}: ` }), ALGO_RULES[a]));
+    if (L.tip) body.append(h('p', { class: 'muted', text: 'หมายเหตุ: ' + L.tip }));
+    body.append(h('p', { class: 'muted', text: 'ตอบถูก +10, ตอบผิด −5 และเสียหัวใจ 1 ดวง, ใบ้ −15 คีย์ลัด: S = สลับ, P = ไม่สลับ, L = < pivot, R = ≥ pivot, H = ใบ้' }));
     $('#tr-intro-h').textContent = 'กฎของด่าน';
     updateStats();
     $('#tr-begin').focus();
@@ -1238,9 +1238,9 @@ const Training = (() => {
     S.arr = S.data.slice(); S.ctx = {}; S.vis = newVis(); S.ptr = 0; S.dIdx = 0; S.hintTarget = null;
     S.counters = { c: 0, s: 0, w: 0 };
     const A = ALGORITHMS[sg.algo];
-    $('#tr-stage').textContent = (L.stages.length > 1 ? `ชั้นที่ ${si + 1}/${L.stages.length} • ` : '') + `${A.icon} ${A.nameEn} (${A.nameTh}) • ${sg.n} ขวด • ข้อมูล: ${SHAPE_TH[sg.shape]}`;
+    $('#tr-stage').textContent = (L.stages.length > 1 ? `ชั้นที่ ${si + 1}/${L.stages.length}, ` : '') + `${A.nameEn} (${A.nameTh}), ${sg.n} ขวด, ข้อมูล: ${SHAPE_TH[sg.shape]}`;
     while (S.ptr < S.bd.preSteps) applyOne(false);
-    setFeedback(S.bd.preMsg || `เริ่ม ${A.nameEn}!`, 'info');
+    setFeedback(S.bd.preMsg || `เริ่ม ${A.nameEn}`, 'info');
     showDecision();
   }
   function applyOne(withSound) {
@@ -1298,10 +1298,10 @@ const Training = (() => {
     const box = $('#tr-actions'); box.textContent = '';
     if (!d) return;
     const btn = (ans, label) => h('button', { type: 'button', class: 'btn' + (S.hintTarget === ans ? ' is-hint' : ''), 'data-ans': ans, text: label, onclick: () => answer(ans) });
-    if (d.kind === 'swapOrPass') box.append(btn('swap', '🔄 สลับ (S)'), btn('pass', '➡ ไม่สลับ / ถัดไป (P)'));
-    else if (d.kind === 'lessOrNot') box.append(btn('less', '⬅ ไปฝั่ง < pivot (L)'), btn('notLess', 'อยู่ฝั่ง ≥ pivot ➡ (R)'));
-    else if (d.kind === 'pickIndex') box.append(h('p', { class: 'muted', text: d.sub === 'selectMin' ? '👆 คลิกขวดที่มีค่าน้อยที่สุดบนชั้น' : '👆 คลิกตำแหน่งบนชั้นที่ pivot ควรไปอยู่' }));
-    else if (d.kind === 'pickSlot') box.append(h('p', { class: 'muted', text: '👆 คลิกช่อง ⤓ ระหว่างขวดเพื่อวาง key' }));
+    if (d.kind === 'swapOrPass') box.append(btn('swap', 'สลับ (S)'), btn('pass', 'ไม่สลับ (P)'));
+    else if (d.kind === 'lessOrNot') box.append(btn('less', '< pivot (L)'), btn('notLess', '≥ pivot (R)'));
+    else if (d.kind === 'pickIndex') box.append(h('p', { class: 'muted', text: d.sub === 'selectMin' ? 'คลิกขวดที่น้อยที่สุดบนชั้น' : 'คลิกตำแหน่งบนชั้นที่ pivot ควรไปอยู่' }));
+    else if (d.kind === 'pickSlot') box.append(h('p', { class: 'muted', text: 'คลิกช่อง ⤓ ระหว่างขวดเพื่อวาง key' }));
   }
   function setFeedback(text, kind) { const f = $('#tr-feedback'); f.textContent = text; f.className = 'feedback ' + (kind || 'info'); }
   function updateStats() {
@@ -1309,7 +1309,7 @@ const Training = (() => {
     const he = $('#tr-hearts');
     he.textContent = `♥ ${S.hearts}/${SCORE.hearts}`; he.setAttribute('aria-label', `หัวใจ ${S.hearts} จาก ${SCORE.hearts}`);
     $('#tr-score').textContent = `คะแนน ${S.score}`;
-    $('#tr-time').textContent = `⏱ ${S.elapsed} วิ`;
+    $('#tr-time').textContent = `เวลา ${S.elapsed} วิ`;
   }
   function answer(ans) {
     const d = current(); if (!d) return;
@@ -1322,7 +1322,7 @@ const Training = (() => {
       S.busy = true; render();
       animateTo(d.toStep, () => {
         S.busy = false;
-        setFeedback('✓ ถูกต้อง! ' + (d.afterMsg || ''), 'ok');
+        setFeedback('✓ ถูกต้อง ' + (d.afterMsg || ''), 'ok');
         updateStats();
         showDecision();
       });
@@ -1361,7 +1361,7 @@ const Training = (() => {
     if (S.stageIdx + 1 < L.stages.length) {
       Sound.play('win');
       const nx = ALGORITHMS[L.stages[S.stageIdx + 1].algo];
-      setFeedback(`🎉 ชั้นที่ ${S.stageIdx + 1} เรียงเสร็จ! ต่อไป: ${nx.nameEn} — ${ALGO_RULES[nx.key]}`, 'ok');
+      setFeedback(`ชั้นที่ ${S.stageIdx + 1} เรียงเสร็จ ต่อไปคือ ${nx.nameEn}: ${ALGO_RULES[nx.key]}`, 'ok');
       $('#tr-explain').textContent = 'กำลังเตรียมชั้นถัดไป…';
       S.busy = true;
       later(() => { S.busy = false; startStage(S.stageIdx + 1); }, reduceMotion ? 1500 : 2600);
@@ -1382,15 +1382,15 @@ const Training = (() => {
     saveProgress();
     Sound.play('win');
     const lvId = L.id;
-    $('#tr-explain').textContent = 'เรียงเสร็จสมบูรณ์! 🎉';
+    $('#tr-explain').textContent = 'เรียงเสร็จแล้ว';
     later(() => {
       const buttons = [];
-      if (lvId < LEVELS.length) buttons.push({ label: 'ด่านถัดไป ▶', primary: true, action: () => { showScreen('training'); state.mode = Training; Training.start(lvId + 1); } });
+      if (lvId < LEVELS.length) buttons.push({ label: 'ด่านถัดไป', primary: true, action: () => { showScreen('training'); state.mode = Training; Training.start(lvId + 1); } });
       buttons.push({ label: 'เล่นอีกครั้ง', action: () => { showScreen('training'); state.mode = Training; Training.start(lvId); } });
       buttons.push({ label: 'เลือกด่าน', action: () => navigate('levels') });
       buttons.push({ label: 'เมนู', action: () => navigate('menu') });
-      showResult({ title: `🎉 ผ่านด่าน ${lvId}!`, stars,
-        sub: lvId === LEVELS.length ? 'ยินดีด้วย! คุณผ่านบททดสอบนักเล่นแร่แปรธาตุ และใช้ได้ครบทั้ง 4 อัลกอริทึม' : `ปลดล็อกด่าน ${lvId + 1} แล้ว`,
+      showResult({ title: `ผ่านด่าน ${lvId}`, stars,
+        sub: lvId === LEVELS.length ? 'ผ่านครบทุกด่าน ใช้ได้ทั้ง 4 อัลกอริทึมแล้ว' : `ด่าน ${lvId + 1} เปิดแล้ว`,
         rows: [['คะแนนจากการตอบ', S.score], ['โบนัสเวลา', `+${bonus}`], ['คะแนนรวม', total], ['เวลา', `${S.elapsed} วินาที`],
           ['ตอบผิด', S.mistakes], ['ใช้คำใบ้', S.hints], ['จุดตัดสินใจทั้งหมด', S.totalDecisions],
           ['อัลกอริทึมเปรียบเทียบ / สลับ / เขียน', `${S.algoTotals.c} / ${S.algoTotals.s} / ${S.algoTotals.w}`]],
@@ -1403,8 +1403,8 @@ const Training = (() => {
     $('#tr-actions').textContent = '';
     $('#tr-hint').disabled = true;
     const lvId = L.id;
-    later(() => showResult({ title: '💔 หัวใจหมดแล้ว — ภารกิจล้มเหลว',
-      sub: 'ลองอ่านกฎของอัลกอริทึมอีกครั้ง หรือใช้ปุ่มใบ้เพื่อดูขั้นตอนถัดไป',
+    later(() => showResult({ title: 'หัวใจหมด ไม่ผ่านด่าน',
+      sub: 'ลองอ่านกฎของอัลกอริทึมอีกครั้ง หรือกดใบ้เพื่อดูขั้นตอนถัดไป',
       rows: [['คะแนน', S.score], ['ตอบผิด', S.mistakes], ['ทำไปได้', `${S.dIdx}/${S.bd.decisions.length} จุดตัดสินใจ (ชั้นที่ ${S.stageIdx + 1})`]],
       buttons: [{ label: 'ลองใหม่', primary: true, action: () => { showScreen('training'); state.mode = Training; Training.start(lvId); } },
         { label: 'เลือกด่าน', action: () => navigate('levels') }, { label: 'เมนู', action: () => navigate('menu') }] }), 1400);
@@ -1427,13 +1427,13 @@ const Training = (() => {
 
 // ===== MODE 2: RACE =====
 /*
- * โหมดแข่ง: ชั้นของเวทมนตร์เล่น steps ของอัลกอริทึมจริงทีละขั้น (applyStep)
+ * โหมดแข่ง: ชั้นของอัลกอริทึมเล่น steps ของอัลกอริทึมจริงทีละขั้น (applyStep)
  * ผู้เล่นสลับขวดคู่ใดก็ได้ แต่มีงบจำนวนสลับ = สลับน้อยที่สุด (จากวงจร) + 2
  */
 const RACE_OPTS = {
   n: [{ v: 6, label: '6 ขวด' }, { v: 8, label: '8 ขวด' }, { v: 10, label: '10 ขวด' }],
-  algo: [{ v: 'random', label: '🎲 สุ่ม' }].concat(ALGO_KEYS.map(k => ({ v: k, label: `${ALGORITHMS[k].icon} ${ALGORITHMS[k].nameEn}` }))),
-  speed: [{ v: 900, label: '🐢 ช้า' }, { v: 550, label: '🚶 ปกติ' }, { v: 300, label: '🐇 เร็ว' }]
+  algo: [{ v: 'random', label: 'สุ่ม' }].concat(ALGO_KEYS.map(k => ({ v: k, label: ALGORITHMS[k].nameEn }))),
+  speed: [{ v: 900, label: 'ช้า' }, { v: 550, label: 'ปกติ' }, { v: 300, label: 'เร็ว' }]
 };
 const raceChoice = { n: 8, algo: 'random', speed: 550 };
 function renderRaceSetup() {
@@ -1457,9 +1457,9 @@ const Race = (() => {
       p: { arr: data.slice(), swaps: 0, sel: -1 },
       a: { arr: data.slice(), ctx: {}, vis: newVis(), ptr: 0, res: ALGORITHMS[algo].fn(data), c: { c: 0, s: 0, w: 0 }, text: '' },
       running: false, over: false, aiTimer: null };
-    $('#rc-ai-h').textContent = `🪄 ชั้นของเวทมนตร์: ${ALGORITHMS[algo].nameEn}`;
+    $('#rc-ai-h').textContent = `ชั้นของอัลกอริทึม: ${ALGORITHMS[algo].nameEn}`;
     $('#rc-astep').textContent = '';
-    setFb(`คลิกขวด 2 ขวดเพื่อสลับ • งบสลับ ${R.budget} ครั้ง (น้อยที่สุดที่เป็นไปได้ ${ms.minSwaps} + 2)`);
+    setFb(`คลิกขวด 2 ขวดเพื่อสลับ สลับได้ ${R.budget} ครั้ง (น้อยที่สุดที่เป็นไปได้ ${ms.minSwaps} + 2)`);
     render();
     countdown(3);
   }
@@ -1467,7 +1467,7 @@ const Race = (() => {
   function countdown(k) {
     const el = $('#rc-count');
     if (k > 0) { el.textContent = String(k); Sound.play('click'); later(() => countdown(k - 1), 800); return; }
-    el.textContent = 'เริ่ม!'; Sound.play('correct');
+    el.textContent = 'เริ่ม'; Sound.play('correct');
     R.running = true; render();
     const f = R.p.arr.length ? $('#rc-pshelf button') : null; if (f) f.focus();
     later(() => { if (R && !R.over) el.textContent = ''; }, 900);
@@ -1490,12 +1490,12 @@ const Race = (() => {
   function pick(k) {
     if (!R || !R.running || R.over) return;
     const P = R.p;
-    if (P.sel < 0) { P.sel = k; Sound.play('click'); setFb(`เลือกขวด ${P.arr[k]} (ตำแหน่ง ${k}) แล้ว — คลิกอีกขวดเพื่อสลับ หรือคลิกซ้ำ/กด Esc เพื่อยกเลิก`); }
+    if (P.sel < 0) { P.sel = k; Sound.play('click'); setFb(`เลือกขวด ${P.arr[k]} (ตำแหน่ง ${k}) แล้ว คลิกอีกขวดเพื่อสลับ หรือคลิกซ้ำหรือกด Esc เพื่อยกเลิก`); }
     else if (P.sel === k) { P.sel = -1; setFb('ยกเลิกการเลือก'); }
     else {
       const a = P.sel; swapIn(P.arr, a, k); P.swaps++; P.sel = -1; P.lastMoved = [a, k];
       Sound.play('swap');
-      setFb(`สลับ ${P.arr[k]} กับ ${P.arr[a]} • ใช้ไป ${P.swaps}/${R.budget}`);
+      setFb(`สลับ ${P.arr[k]} กับ ${P.arr[a]} ใช้ไป ${P.swaps}/${R.budget}`);
       if (isSorted(P.arr)) { renderPlayer(); finish(true, 'sorted'); return; }
       if (P.swaps >= R.budget) { renderPlayer(); finish(false, 'budget'); return; }
     }
@@ -1514,7 +1514,7 @@ const Race = (() => {
         return { cls, mark, words };
       } });
     $('#rc-pstat').textContent = `สลับแล้ว ${P.swaps} / ${R.budget}`;
-    $('#rc-budget').textContent = `งบสลับ ${R.budget - P.swaps} ครั้ง`;
+    $('#rc-budget').textContent = `สลับได้อีก ${R.budget - P.swaps} ครั้ง`;
   }
   function renderAI() {
     const A = R.a;
@@ -1528,8 +1528,8 @@ const Race = (() => {
     R.over = true; R.running = false;
     if (R.aiTimer) cancelTimer(R.aiTimer);
     if (win) { state.progress.raceWins++; saveProgress(); Sound.play('win'); } else Sound.play('lose');
-    const msg = { sorted: '🏆 คุณเรียงเสร็จก่อนเวทมนตร์!', ai: `🪄 ${ALGORITHMS[R.algo].nameEn} เรียงเสร็จก่อน`, budget: '💥 ใช้งบสลับหมดแต่ยังเรียงไม่เสร็จ', quit: '🏳 ยอมแพ้' }[reason];
-    $('#rc-count').textContent = win ? 'ชนะ!' : 'แพ้!';
+    const msg = { sorted: 'คุณเรียงเสร็จก่อนอัลกอริทึม', ai: `${ALGORITHMS[R.algo].nameEn} เรียงเสร็จก่อน`, budget: 'สลับครบจำนวนแล้วแต่ยังเรียงไม่เสร็จ', quit: 'ยอมแพ้' }[reason];
+    $('#rc-count').textContent = win ? 'ชนะ' : 'แพ้';
     setFb(msg);
     renderPlayer();
     const snap = R;
@@ -1544,12 +1544,12 @@ const Race = (() => {
       h('tbody', null, ALGO_KEYS.map(k => { const o = countOps(ALGORITHMS[k].fn(r.data)); return h('tr', { class: k === r.algo ? 'win' : null }, h('td', { text: ALGORITHMS[k].nameEn + (k === r.algo ? ' (คู่แข่ง)' : '') }), h('td', { text: o.comparisons }), h('td', { text: o.swaps }), h('td', { text: o.writes })); })));
     const extra = h('div', null,
       h('p', { text: `ข้อมูลเริ่มต้น: [${r.data.join(', ')}]` }),
-      h('p', { text: `สลับน้อยที่สุด = จำนวนขวด − จำนวนวงจร = ${r.data.length} − ${r.data.length - r.ms.minSwaps} = ${r.ms.minSwaps} ครั้ง` + (cyc ? ` • วงจรของตำแหน่ง (ขวดที่ตำแหน่งหนึ่งต้องย้ายไปตำแหน่งถัดไปในวงเล็บ): ${cyc}` : '') }),
-      h('p', { class: 'muted', text: 'วงจรที่มี k ขวดใช้การสลับ k−1 ครั้ง Selection Sort สลับไม่เกิน n−1 ครั้ง ส่วน Bubble Sort สลับเท่ากับจำนวนคู่ที่กลับลำดับ (inversions) จึงมักสลับมากที่สุด แต่ผู้เล่นที่มองเห็นวงจรสามารถสลับน้อยกว่าอัลกอริทึมได้!' }),
+      h('p', { text: `สลับน้อยที่สุด = จำนวนขวด − จำนวนวงจร = ${r.data.length} − ${r.data.length - r.ms.minSwaps} = ${r.ms.minSwaps} ครั้ง` + (cyc ? ` วงจรของตำแหน่ง (ขวดในตำแหน่งหนึ่งต้องย้ายไปตำแหน่งถัดไปในวงเล็บ): ${cyc}` : '') }),
+      h('p', { class: 'muted', text: 'วงจรที่มี k ขวดใช้การสลับ k−1 ครั้ง Selection Sort สลับไม่เกิน n−1 ครั้ง ส่วน Bubble Sort สลับเท่ากับจำนวนคู่ที่กลับลำดับ (inversions) จึงมักสลับมากที่สุด ถ้ามองเห็นวงจร คุณจะสลับน้อยกว่าอัลกอริทึมได้' }),
       h('div', { class: 'table-wrap' }, tbl));
-    showResult({ title: win ? '🏆 ชนะการแข่งขัน!' : '🪄 แพ้การแข่งขัน', sub: msg,
+    showResult({ title: win ? 'ชนะ' : 'แพ้', sub: msg,
       rows: [['คุณสลับ', `${r.p.swaps} ครั้ง (งบ ${r.budget})`], ['สลับน้อยที่สุดที่เป็นไปได้', `${r.ms.minSwaps} ครั้ง`],
-        ['คุณเรียงเสร็จหรือไม่', isSorted(r.p.arr) ? 'เสร็จ ✓' : 'ยังไม่เสร็จ'],
+        ['คุณเรียงเสร็จหรือไม่', isSorted(r.p.arr) ? 'เสร็จ' : 'ยังไม่เสร็จ'],
         [`${ALGORITHMS[r.algo].nameEn} ทำไปแล้ว`, `${r.a.ptr}/${full.steps.length} ขั้น (เปรียบเทียบ ${r.a.c.c}, สลับ ${r.a.c.s}, เขียน ${r.a.c.w})`],
         [`${ALGORITHMS[r.algo].nameEn} ทั้งหมดต้องใช้`, `เปรียบเทียบ ${full.comparisons}, สลับ ${full.swaps}, เขียน ${full.writes}`]],
       extra,
@@ -1562,7 +1562,7 @@ const Race = (() => {
 
 // ===== MODE 3: PREDICT =====
 /*
- * โหมดทำนาย: ผู้เล่นทายว่าอัลกอริทึมไหนเหมาะกับข้อมูล แล้วเกม "รันจริง" ทั้ง 4 ตัว (evaluatePrediction)
+ * โหมดทาย: ผู้เล่นทายว่าอัลกอริทึมไหนเหมาะกับข้อมูล แล้วเกม "รันจริง" ทั้ง 4 ตัว (evaluatePrediction)
  * นำตัวนับจริงมาวาดกราฟและตาราง ผู้ชนะที่เสมอกันนับว่าถูกทั้งหมด
  */
 const Predict = (() => {
@@ -1576,14 +1576,14 @@ const Predict = (() => {
     $('#pd-round').textContent = `รอบ ${P.idx + 1}/${P.rounds.length}`;
     $('#pd-score').textContent = `คะแนน ${P.score}`;
     $('#pd-streak').textContent = `ถูกติดกัน ${P.streak}`;
-    $('#pd-shape').textContent = `${r.shapeTh} • ${r.n} ขวด`;
+    $('#pd-shape').textContent = `${r.shapeTh}, ${r.n} ขวด`;
     $('#pd-question').textContent = r.question;
     renderShelf($('#pd-shelf'), r.data, {});
     const ch = $('#pd-choices'); ch.textContent = '';
     for (const k of ALGO_KEYS) {
       const A = ALGORITHMS[k];
       ch.append(h('button', { type: 'button', class: 'btn', 'data-algo': k, onclick: () => choose(k) },
-        h('strong', { text: `${A.icon} ${A.nameEn}` }), h('br'), h('span', { class: 'muted', text: `${A.nameTh} • เฉลี่ย ${A.avg}` })));
+        h('strong', { text: A.nameEn }), h('br'), h('span', { class: 'muted', text: `${A.nameTh}, เฉลี่ย ${A.avg}` })));
     }
     $('#pd-reveal').hidden = true;
   }
@@ -1599,12 +1599,12 @@ const Predict = (() => {
     document.querySelectorAll('#pd-choices button').forEach(b => {
       const key = b.getAttribute('data-algo');
       b.disabled = true;
-      if (ev.winners.indexOf(key) >= 0) { b.classList.add('is-right'); b.append(h('span', { text: ' ✓ ผู้ชนะ' })); }
+      if (ev.winners.indexOf(key) >= 0) { b.classList.add('is-right'); b.append(h('span', { text: ' ✓ น้อยที่สุด' })); }
       else if (key === k) { b.classList.add('is-wrong'); b.append(h('span', { text: ' ✗ ที่คุณเลือก' })); }
     });
     $('#pd-score').textContent = `คะแนน ${P.score}`;
     $('#pd-streak').textContent = `ถูกติดกัน ${P.streak}`;
-    $('#pd-verdict').textContent = ok ? `✓ ทายถูก! +${gained} คะแนน` : `✗ ยังไม่ถูก — ผู้ชนะคือ ${ev.winners.map(w => ALGORITHMS[w].nameEn).join(' และ ')}`;
+    $('#pd-verdict').textContent = ok ? `✓ ทายถูก +${gained} คะแนน` : `✗ ทายผิด ตัวที่น้อยที่สุดคือ ${ev.winners.map(w => ALGORITHMS[w].nameEn).join(' และ ')}`;
     const max = Math.max(1, ...ALGO_KEYS.map(a => ev.values[a]));
     const chart = $('#pd-chart'); chart.textContent = '';
     chart.append(h('p', { class: 'muted', text: `กราฟ: ${METRIC_TH[r.metric]} (น้อย = ดี)` }));
@@ -1621,7 +1621,7 @@ const Predict = (() => {
       h('tbody', null, ALGO_KEYS.map(a => { const o = ev.per[a]; return h('tr', { class: ev.winners.indexOf(a) >= 0 ? 'win' : null },
         h('td', { text: ALGORITHMS[a].nameEn }), h('td', { text: o.comparisons }), h('td', { text: o.swaps }), h('td', { text: o.writes }), h('td', { text: o.moves }), h('td', { text: o.total })); })));
     $('#pd-explain').textContent = explainPrediction(r, ev);
-    $('#pd-next').textContent = P.idx + 1 < P.rounds.length ? 'รอบถัดไป ▶' : 'ดูผลสรุป';
+    $('#pd-next').textContent = P.idx + 1 < P.rounds.length ? 'รอบถัดไป' : 'ดูผลสรุป';
     $('#pd-reveal').hidden = false;
     $('#pd-verdict').focus();
   }
@@ -1634,18 +1634,17 @@ const Predict = (() => {
     state.progress.predictBest = best; saveProgress();
     Sound.play(P.correct >= 5 ? 'win' : 'lose');
     const fin = P;
-    showResult({ title: '🔮 จบการทำนาย', sub: `ฉายา: ${rankTitle(fin.score)}` + (isNew ? ' • 🎉 สถิติใหม่!' : ''),
+    showResult({ title: 'จบโหมดทาย', sub: `ระดับ: ${rankTitle(fin.score)}` + (isNew ? ' (สถิติใหม่)' : ''),
       rows: [['ทายถูก', `${fin.correct}/${fin.rounds.length} รอบ`], ['คะแนนรวม', fin.score], ['คะแนนสูงสุด', best]],
-      extra: h('p', { class: 'muted', text: 'สรุปบทเรียน: ข้อมูลเกือบเรียง → Insertion Sort (เมื่อดูการดำเนินการรวม), อยากย้ายข้อมูลน้อย → Selection Sort, ข้อมูลสุ่มขนาดใหญ่ → Quick Sort, แต่ Quick Sort แบบ pivot ตัวสุดท้ายแย่มากกับข้อมูลที่เรียงแล้ว' }),
       buttons: [{ label: 'เล่นอีกครั้ง', primary: true, action: () => navigate('predict') }, { label: 'เมนู', action: () => navigate('menu') }] });
   }
   return { start, next, dispose() { P = null; }, _choose: choose };
 })();
 
 // ===== CODEX =====
-// สมุดตำรา: คำอธิบายแต่ละอัลกอริทึม + การสาธิตที่เล่น steps จริงด้วย applyStep
+// คู่มือ: คำอธิบายแต่ละอัลกอริทึม + การสาธิตที่เล่น steps จริงด้วย applyStep
 const CODEX_INFO = {
-  bubble: { idea: 'เปรียบเทียบคู่ที่อยู่ติดกันซ้ำ ๆ ถ้าซ้ายมากกว่าขวาก็สลับ ค่าที่มากที่สุดจะค่อย ๆ "ลอย" ไปท้ายแถวเหมือนฟองสบู่',
+  bubble: { idea: 'เทียบคู่ที่ติดกันซ้ำ ๆ ถ้าซ้ายมากกว่าขวาก็สลับ ค่าที่มากที่สุดจะค่อย ๆ ขยับไปท้ายแถว',
     steps: ['เริ่มจากคู่ตำแหน่ง (0,1), (1,2), … ไปจนถึงส่วนท้ายที่ยังไม่เรียง', 'ถ้า a[j] > a[j+1] ให้สลับ', 'จบรอบ ค่ามากสุดเข้าที่ท้ายสุด รอบถัดไปสั้นลง 1 ตำแหน่ง', 'ถ้ารอบใดไม่มีการสลับเลย หยุดได้ทันที (early exit)'],
     when: 'เหมาะกับการสอนและข้อมูลที่เกือบเรียงแล้ว (มี early exit) ไม่เหมาะกับข้อมูลขนาดใหญ่' },
   selection: { idea: 'แต่ละรอบ "เลือก" ค่าที่น้อยที่สุดของส่วนที่ยังไม่เรียง แล้วสลับมาไว้หน้าสุดของส่วนนั้น',
@@ -1653,10 +1652,10 @@ const CODEX_INFO = {
     when: 'เหมาะเมื่อการ "ย้าย/เขียน" ข้อมูลมีราคาแพง เพราะสลับไม่เกิน n−1 ครั้ง แต่เปรียบเทียบ n(n−1)/2 ครั้งเสมอ' },
   insertion: { idea: 'เหมือนการเรียงไพ่ในมือ หยิบใบถัดไปขึ้นมา (key) แล้วแทรกลงในส่วนซ้ายที่เรียงแล้ว',
     steps: ['ยก a[i] ขึ้นเป็น key', 'ไล่ไปทางซ้าย ค่าที่มากกว่า key ให้เลื่อนไปทางขวา 1 ช่อง', 'เจอค่าที่ ≤ key (หรือสุดแถว) ให้วาง key ลงช่องว่าง', 'ทำซ้ำจนครบทุกตัว'],
-    when: 'ดีมากกับข้อมูลเกือบเรียงหรือข้อมูลขนาดเล็ก (เกือบ O(n)) และเป็น stable จึงถูกใช้ในอัลกอริทึมลูกผสมอย่าง TimSort' },
-  quick: { idea: 'แบ่งแล้วเอาชนะ: เลือก pivot แล้วจัดให้ค่าที่น้อยกว่า pivot อยู่ซ้าย ค่าที่เหลืออยู่ขวา pivot จะเข้าที่ถาวร จากนั้นทำซ้ำกับสองฝั่ง',
+    when: 'ทำงานดีกับข้อมูลเกือบเรียงหรือข้อมูลขนาดเล็ก (เกือบ O(n)) และเป็น stable จึงถูกใช้ในอัลกอริทึมลูกผสมอย่าง TimSort' },
+  quick: { idea: 'แบ่งแล้วเอาชนะ: เลือก pivot แล้วจัดค่าที่น้อยกว่า pivot ไว้ซ้าย ค่าที่เหลือไว้ขวา pivot จะเข้าที่ถาวร แล้วทำซ้ำกับสองฝั่ง',
     steps: ['เลือกตัวสุดท้ายของช่วงเป็น pivot (Lomuto)', 'ไล่ j จากซ้าย ถ้า a[j] < pivot ให้ขยายโซนซ้ายแล้วสลับ a[j] เข้าไป', 'สลับ pivot ไปไว้ถัดจากโซนซ้าย (ตำแหน่ง i+1)', 'เรียกซ้ำกับฝั่งซ้ายและฝั่งขวาของ pivot'],
-    when: 'เร็วมากโดยเฉลี่ยกับข้อมูลสุ่มขนาดใหญ่ แต่ถ้าเลือก pivot ตัวสุดท้ายกับข้อมูลที่เรียงแล้ว/กลับด้าน จะแย่สุด O(n²)' }
+    when: 'โดยเฉลี่ยเร็วกับข้อมูลสุ่มขนาดใหญ่ แต่ถ้าใช้ pivot ตัวสุดท้ายกับข้อมูลที่เรียงแล้วหรือกลับด้าน จะเป็นกรณีแย่สุด O(n²)' }
 };
 const CODEX_SAMPLE = [42, 17, 88, 5, 63, 29];
 const Codex = (() => {
@@ -1665,7 +1664,7 @@ const Codex = (() => {
     const tabs = $('#cx-tabs'); tabs.textContent = '';
     for (const k of ALGO_KEYS) {
       tabs.append(h('button', { type: 'button', class: 'btn small', role: 'tab', id: 'cx-tab-' + k, 'aria-controls': 'cx-panel',
-        'aria-selected': 'false', tabindex: '-1', text: `${ALGORITHMS[k].icon} ${ALGORITHMS[k].nameEn}`, onclick: () => select(k, true) }));
+        'aria-selected': 'false', tabindex: '-1', text: ALGORITHMS[k].nameEn, onclick: () => select(k, true) }));
     }
     select(current, false);
   }
@@ -1679,17 +1678,17 @@ const Codex = (() => {
     $('#cx-panel').setAttribute('aria-labelledby', 'cx-tab-' + k);
     const A = ALGORITHMS[k], I = CODEX_INFO[k];
     const info = $('#cx-info'); info.textContent = '';
-    info.append(h('h3', { text: `${A.icon} ${A.nameEn} (${A.nameTh})` }), h('p', { text: I.idea }),
+    info.append(h('h3', { text: `${A.nameEn} (${A.nameTh})` }), h('p', { text: I.idea }),
       h('ol', null, I.steps.map(s => h('li', { text: s }))),
       h('div', { class: 'table-wrap' }, h('table', null,
         h('thead', null, h('tr', null, ['กรณีดีที่สุด', 'เฉลี่ย', 'แย่ที่สุด', 'หน่วยความจำ', 'Stable?'].map(t => h('th', { scope: 'col', text: t })))),
-        h('tbody', null, h('tr', null, [A.best, A.avg, A.worst, A.space, A.stable ? 'ใช่ ✓' : 'ไม่ใช่ ✗'].map(t => h('td', { text: t })))))),
+        h('tbody', null, h('tr', null, [A.best, A.avg, A.worst, A.space, A.stable ? 'ใช่' : 'ไม่ใช่'].map(t => h('td', { text: t })))))),
       h('p', null, h('strong', { text: 'ควรใช้เมื่อ: ' }), I.when));
     reset();
   }
   function reset() {
     stop();
-    D = { arr: CODEX_SAMPLE.slice(), ctx: {}, vis: newVis(), ptr: 0, res: ALGORITHMS[current].fn(CODEX_SAMPLE), c: { c: 0, s: 0, w: 0 }, text: 'กด ▶ เล่น หรือ ⏭ ทีละขั้น เพื่อดูการทำงาน', playing: false, timer: null };
+    D = { arr: CODEX_SAMPLE.slice(), ctx: {}, vis: newVis(), ptr: 0, res: ALGORITHMS[current].fn(CODEX_SAMPLE), c: { c: 0, s: 0, w: 0 }, text: 'กด "เล่น" หรือ "ทีละขั้น" เพื่อดูการทำงาน', playing: false, timer: null };
     render();
   }
   function step() {
@@ -1705,13 +1704,13 @@ const Codex = (() => {
     if (!D) return;
     if (D.playing) { stop(); return; }
     if (D.ptr >= D.res.steps.length) reset();
-    D.playing = true; $('#cx-play').textContent = '⏸ หยุด';
+    D.playing = true; $('#cx-play').textContent = 'หยุด';
     const loop = () => { if (!D || !D.playing) return; if (step()) D.timer = later(loop, reduceMotion ? 400 : 650); };
     loop();
   }
   function stop() {
     if (D) { D.playing = false; if (D.timer) { cancelTimer(D.timer); D.timer = null; } }
-    const b = $('#cx-play'); if (b) b.textContent = '▶ เล่น';
+    const b = $('#cx-play'); if (b) b.textContent = 'เล่น';
   }
   function render() {
     renderShelf($('#cx-shelf'), D.arr, { holeIndex: D.vis.hole, keyValue: D.vis.key, marks: (k) => visMarks(D.vis, k) });
@@ -1733,7 +1732,7 @@ function updateMuteBtn() {
   const b = $('#mute-btn'); const m = state.progress.muted;
   b.setAttribute('aria-pressed', m ? 'true' : 'false');
   b.setAttribute('aria-label', m ? 'เปิดเสียง' : 'ปิดเสียง');
-  b.textContent = m ? '🔇 ปิดเสียง' : '🔊 เสียง';
+  b.textContent = m ? 'เสียง: ปิด' : 'เสียง: เปิด';
 }
 function init() {
   state.progress = loadProgress();
